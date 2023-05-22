@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sat May 09 20:15:06 2015
+Created on Mon May 22 19:22:19 2023
 
-@author: Alberto
+Base de conocimiento de valoracion de Becas
+
+@author: Alfonso Cabezas Fernández
 """
 
 #!/usr/bin/env python
@@ -11,6 +12,8 @@ Created on Sat May 09 20:15:06 2015
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtGui import QIcon
 
 from bcValoracion import *
 import ckCtrlValoracion as ctrl
@@ -28,9 +31,9 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.dominio = 'Becas'
 
         # Label
-        labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos Personales", self)
-        labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos solicitud", self)
-        labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos abstraidos", self)
+        labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos del Solicitante", self)
+        labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la solicitud", self)
+        labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos Abstraidos", self)
 
         labelTextDecision = QtWidgets.QLabel("Decisión", self)
         labelTextExplicacion = QtWidgets.QLabel("Explicacion", self)
@@ -44,13 +47,17 @@ class ValoracionDlg(QtWidgets.QWidget):
 
         # Datos abstraidos
         self.tableWidgetDatosAbstraidos = QtWidgets.QTableWidget(len(self.persona.atributos) + len(self.solicitud.atributos), 2)
-        self.tableWidgetDatosAbstraidos.setColumnWidth(0, 140)
-        self.tableWidgetDatosAbstraidos.setColumnWidth(1, 200)
+        self.tableWidgetDatosAbstraidos.setColumnWidth(0, 240)
+        self.tableWidgetDatosAbstraidos.setColumnWidth(1, 300)
         self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(header)
 
         # Decision
         self.plainTextEditDecision = QtWidgets.QPlainTextEdit()
-
+        self.plainTextEditDecision = QtWidgets.QPlainTextEdit(self)
+        font = QtGui.QFont()
+        font.setPointSize(50)
+        self.plainTextEditDecision.setFont(font)
+        
         # Explicación
         self.plainTextEditExplicacion = QtWidgets.QPlainTextEdit()
 
@@ -61,9 +68,15 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.comboBoxDominio.activated[str].connect(self.dominioModificado)
 
         # Botones
-        self.valorarButtom = QtWidgets.QPushButton('Valorar')
-        self.borrarButtom = QtWidgets.QPushButton('Borrar')
-        self.salirButtom = QtWidgets.QPushButton('Salir')
+        self.valorarButtom = QPushButton(QIcon("./Valorar.png"), "Valorar", self)
+        self.valorarButtom.setShortcut("Ctrl+v")
+        
+        self.borrarButtom = QPushButton(QIcon("./Delete.png"), "Borrar", self)
+        self.borrarButtom.setShortcut("Ctrl+v")
+        
+        self.salirButtom = QPushButton(QIcon("./exit24.png"), "Salir", self)
+        self.salirButtom.setShortcut("Ctrl+s")
+        
         self.buttomsLayout = QtWidgets.QHBoxLayout()
         self.buttomsLayout.addStretch()
         self.buttomsLayout.addWidget(self.valorarButtom)
@@ -102,7 +115,7 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.setLayout(mainLayout)
 
         # Dimensiones de la ventana
-        self.setGeometry(300, 300, 800, 800)
+        self.setGeometry(300, 300, 1200, 1200)
         self.setWindowTitle("TAREA DE VALORACIÓN")
         self.show()
 

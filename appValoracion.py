@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 09 20:16:02 2015
+Created on Mon May 22 19:22:19 2023
 
-@author: Alberto
+@author: Alfonso Cabezas Fernández
 """
+
 
 import sys
 from PyQt5.QtWidgets import QApplication

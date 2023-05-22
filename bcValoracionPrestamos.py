@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Apr 26 12:03:13 2015
-Base de conocimiento de valoracion de Prestamos
-@author: Alberto
-"""
+Created on Mon May 22 19:22:19 2023
 
+Base de conocimiento de valoracion de Prestamos
+
+@author: Alfonso Cabezas Fernández
+"""
 
 from bcValoracion import *
 

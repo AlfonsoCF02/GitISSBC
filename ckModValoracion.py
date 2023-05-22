@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 """
-Created on Tue May 05 18:58:24 2015
+Created on Mon May 22 19:22:19 2023
 
-@author: Alberto
+Base de conocimiento de valoracion de Becas
+
+@author: Alfonso Cabezas Fernández
 """
 
 #!/usr/bin/env python

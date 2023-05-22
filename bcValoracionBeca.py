@@ -1,9 +1,12 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Apr 26 12:03:13 2015
+Created on Mon May 22 19:22:19 2023
+
 Base de conocimiento de valoracion de Becas
-@author: Alberto
+
+@author: Alfonso Cabezas Fernández
 """
+
+
 import sys
 from PyQt5.QtWidgets import QApplication
 from bcValoracion import *
