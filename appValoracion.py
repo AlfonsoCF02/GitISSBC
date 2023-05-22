@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon May 9 11:20:44 2023
+Created on Sat May 09 20:16:02 2015
 
-@author: Alfonso Cabezas Fernández
+@author: Alberto
 """
 
 import sys
-from PyQt4 import QtGui
+from PyQt5.QtWidgets import QApplication
 import ckVstValoracion
 
-app = QtGui.QApplication(sys.argv)
-form = ckVstValoracion.ValoracionDlg()
-sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    form = ckVstValoracion.ValoracionDlg()
+    form.show()
+    sys.exit(app.exec_())
