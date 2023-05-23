@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module bcValoracionBeca</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>bcValoracionBeca</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Calfon%5Cdocuments%5Cgithub%5Cgitissbc%5Cbcvaloracionbeca.py">c:\users\alfon\documents\github\gitissbc\bcvaloracionbeca.py</a></font></td></tr></table>
+    <p><tt>Created&nbsp;on&nbsp;Mon&nbsp;May&nbsp;22&nbsp;19:22:19&nbsp;2023<br>
+&nbsp;<br>
+Base&nbsp;de&nbsp;conocimiento&nbsp;de&nbsp;valoracion&nbsp;de&nbsp;Becas<br>
+&nbsp;<br>
+@author:&nbsp;Abraham&nbsp;Córdoba</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="types.html">types</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="bcValoracion.html#Clase">bcValoracion.Clase</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="bcValoracionBeca.html#Persona">Persona</a>
+</font></dt><dt><font face="helvetica, arial"><a href="bcValoracionBeca.html#Solicitud">Solicitud</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="bcValoracion.html#Regla">bcValoracion.Regla</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="bcValoracionBeca.html#AbstraerLimite">AbstraerLimite</a>
+</font></dt><dt><font face="helvetica, arial"><a href="bcValoracionBeca.html#AbstraerPorcentaje">AbstraerPorcentaje</a>
+</font></dt><dt><font face="helvetica, arial"><a href="bcValoracionBeca.html#Criterio">Criterio</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AbstraerLimite">class <strong>AbstraerLimite</strong></a>(<a href="bcValoracion.html#Regla">bcValoracion.Regla</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#AbstraerLimite">AbstraerLimite</a>(idRegla)<br>
+&nbsp;<br>
+<a href="bcValoracion.html#Regla">Regla</a>&nbsp;basica&nbsp;para&nbsp;abstraer&nbsp;el&nbsp;limite&nbsp;minimo&nbsp;para&nbsp;la&nbsp;concesion&nbsp;de&nbsp;la&nbsp;beca<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="bcValoracionBeca.html#AbstraerLimite">AbstraerLimite</a></dd>
+<dd><a href="bcValoracion.html#Regla">bcValoracion.Regla</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AbstraerLimite-__init__"><strong>__init__</strong></a>(self, idRegla)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="AbstraerLimite-execute"><strong>execute</strong></a>(self, persona, solicitud)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.Regla</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AbstraerPorcentaje">class <strong>AbstraerPorcentaje</strong></a>(<a href="bcValoracion.html#Regla">bcValoracion.Regla</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#AbstraerPorcentaje">AbstraerPorcentaje</a>(idRegla)<br>
+&nbsp;<br>
+<a href="bcValoracion.html#Regla">Regla</a>&nbsp;basica&nbsp;para&nbsp;abstraer&nbsp;porcentaje&nbsp;de&nbsp;aprobados<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="bcValoracionBeca.html#AbstraerPorcentaje">AbstraerPorcentaje</a></dd>
+<dd><a href="bcValoracion.html#Regla">bcValoracion.Regla</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AbstraerPorcentaje-__init__"><strong>__init__</strong></a>(self, idRegla)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="AbstraerPorcentaje-execute"><strong>execute</strong></a>(self, persona, solicitud)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.Regla</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Criterio">class <strong>Criterio</strong></a>(<a href="bcValoracion.html#Regla">bcValoracion.Regla</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Criterio">Criterio</a>(idRegla)<br>
+&nbsp;<br>
+Define&nbsp;el&nbsp;criterio&nbsp;que&nbsp;seguira&nbsp;el&nbsp;sistema&nbsp;para&nbsp;aceptar&nbsp;o&nbsp;denegar&nbsp;una&nbsp;beca<br>
+@param:&nbsp;Creditos&nbsp;&gt;=&nbsp;80&nbsp;+0.2<br>
+@param:&nbsp;Creditos&nbsp;&gt;=65&nbsp;and&nbsp;&lt;&nbsp;80&nbsp;+0.2<br>
+@param:&nbsp;Nota&gt;=6.5&nbsp;+0.2<br>
+@param:&nbsp;Renta&lt;=20000&nbsp;+0.2<br>
+@param:&nbsp;Independencia&nbsp;==&nbsp;true&nbsp;+0.2<br>
+@return:&nbsp;valor&nbsp;total&nbsp;de&nbsp;la&nbsp;solicitud.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="bcValoracionBeca.html#Criterio">Criterio</a></dd>
+<dd><a href="bcValoracion.html#Regla">bcValoracion.Regla</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Criterio-__init__"><strong>__init__</strong></a>(self, idRegla)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Criterio-execute"><strong>execute</strong></a>(self, persona, solicitud)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.Regla</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Persona">class <strong>Persona</strong></a>(<a href="bcValoracion.html#Clase">bcValoracion.Clase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Persona">Persona</a>(nombre=None)<br>
+&nbsp;<br>
+Describe&nbsp;los&nbsp;atributos&nbsp;por&nbsp;los&nbsp;que&nbsp;se&nbsp;caracterizará&nbsp;a&nbsp;una&nbsp;persona&nbsp;solicitante&nbsp;de&nbsp;una&nbsp;Beca.<br>
+@param:&nbsp;Renta<br>
+@param:&nbsp;Asignaturas&nbsp;Cursadas<br>
+@param:&nbsp;Asignaturas&nbsp;Aprobadas<br>
+@param:&nbsp;Creditos&nbsp;Aprobados<br>
+@param:&nbsp;Nota&nbsp;media<br>
+@param:&nbsp;Independiente<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="bcValoracionBeca.html#Persona">Persona</a></dd>
+<dd><a href="bcValoracion.html#Clase">bcValoracion.Clase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Persona-__init__"><strong>__init__</strong></a>(self, nombre=None)</dt><dd><tt>@param:&nbsp;Nombre&nbsp;de&nbsp;la&nbsp;clase.<br>
+@param:&nbsp;Reglas&nbsp;de&nbsp;la&nbsp;clase.<br>
+@param:&nbsp;Descripcion&nbsp;de&nbsp;la&nbsp;clase.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="bcValoracion.html#Clase">bcValoracion.Clase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Solicitud">class <strong>Solicitud</strong></a>(<a href="bcValoracion.html#Clase">bcValoracion.Clase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Solicitud">Solicitud</a>(nombre=None)<br>
+&nbsp;<br>
+Describe&nbsp;los&nbsp;atributos&nbsp;por&nbsp;los&nbsp;que&nbsp;se&nbsp;caracterizará&nbsp;a&nbsp;una&nbsp;solicitud&nbsp;de&nbsp;beca<br>
+@param:&nbsp;atTipo<br>
+@param:&nbsp;valorLimite<br>
+@param:&nbsp;atributos<br>
+@param:&nbsp;criterio<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="bcValoracionBeca.html#Solicitud">Solicitud</a></dd>
+<dd><a href="bcValoracion.html#Clase">bcValoracion.Clase</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Solicitud-__init__"><strong>__init__</strong></a>(self, nombre=None)</dt><dd><tt>@param:&nbsp;Nombre&nbsp;de&nbsp;la&nbsp;clase.<br>
+@param:&nbsp;Reglas&nbsp;de&nbsp;la&nbsp;clase.<br>
+@param:&nbsp;Descripcion&nbsp;de&nbsp;la&nbsp;clase.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="bcValoracion.html#Clase">bcValoracion.Clase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
