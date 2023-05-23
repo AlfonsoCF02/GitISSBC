@@ -66,160 +66,138 @@ class Persona(Clase):
 
 
 class Criterio(Regla):
-	"""
-	Requisitos aplicados para valorar la concesion de un prestamo
-	@return: valor calculado para ver si es solvente o no.
-	"""
-  
-	def __init__(self,idRegla):
-        
-		Regla.__init__(self,idRegla)
-             
-	def execute(self,persona,solicitud):
-        
-		valor=0.0
-            
-		if persona.atSolvencia.valor == 'Mucha':
-			solicitud.descripcion+='El atributo '+persona.atSolvencia.nombre+' con valor '+persona.atSolvencia.valor+' proporciona 0.7 puntos de valoracion\n'
-			valor=valor+0.7
-        
-		if persona.atSituacionLaboral.valor == 'Trabajo Fijo':
-			solicitud.descripcion+='El atributo '+persona.atSituacionLaboral.nombre+' con valor '+persona.atSituacionLaboral.valor+' proporciona 0.4 puntos de valoracion\n'
-			valor=valor+0.4
-        
-		if persona.atSituacionLaboral.valor == 'Trabajo Temporal':
-			solicitud.descripcion+='El atributo '+persona.atSituacionLaboral.nombre+' con valor '+persona.atSituacionLaboral.valor+' proporciona 0.2 puntos de valoracion\n'
-			valor=valor+0.2
-            
-		return valor, solicitud
+    """
+    Requisitos aplicados para valorar la concesión de un préstamo
+    @return: valor calculado para determinar si es solvente o no.
+    """
+
+    def __init__(self, idRegla):
+        Regla.__init__(self, idRegla)
+
+    def execute(self, persona, solicitud):
+        valor = 0.0
+
+        solvencia = persona.atSolvencia.valor
+        if solvencia == 'Mucha':
+            solicitud.descripcion += 'El atributo ' + persona.atSolvencia.nombre + ' con valor ' + solvencia + ' proporciona 0.7 puntos de valoración\n'
+            valor += 0.7
+
+        situacion_laboral = persona.atSituacionLaboral.valor
+        if situacion_laboral == 'Trabajo Fijo':
+            solicitud.descripcion += 'El atributo ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' proporciona 0.4 puntos de valoración\n'
+            valor += 0.4
+        elif situacion_laboral == 'Trabajo Temporal':
+            solicitud.descripcion += 'El atributo ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' proporciona 0.2 puntos de valoración\n'
+            valor += 0.2
+
+        return valor, solicitud
+
 
   
     
 class AbstraerSueldoMensual(Regla):
-	"""
-	Regla basica para abstraer el sueldo mensual del solicitante del prestamo
-	@param: sueldoAnual
-	@return: sueldo de la persona
-	"""  
+    """
+    Regla básica para abstraer el sueldo mensual del solicitante del préstamo
+    @param: sueldoAnual
+    @return: sueldo mensual de la persona
+    """
 
-	def __init__(self,idRegla):
-		Regla.__init__(self,idRegla)
-  
+    def __init__(self, idRegla):
+        Regla.__init__(self, idRegla)
 
-	def execute(self,persona,solicitud):
+    def execute(self, persona, solicitud):
+        mensual = persona.atSueldoAnual.valor / 12.0
+        print(mensual)
+        asignado = False
+        for i in persona.atributos:
+            if i.nombre == 'Sueldo Mensual':
+                i.valor = mensual
+                asignado = True
+        if not asignado:
+            persona.atSueldoMensual.valor = mensual
+            persona.atributos.append(persona.atSueldoMensual)
 
-		mensual=persona.atSueldoAnual.valor/12.0
-		print(mensual)
-		asignado=False        
-		for i in persona.atributos:
-			if i.nombre == 'Sueldo Mensual':
-				i.valor=mensual
-				asignado=True
-		if asignado == False:
-			persona.atSueldoMensual.valor=mensual
-			persona.atributos.append(persona.atSueldoMensual)
-                
-		return persona
+        return persona
         
     
 class AbstraerSolvencia(Regla):
-	"""
-	Regla basica para abstraer la solvencia del solicitante del prestamo
+    """
+    Regla básica para abstraer la solvencia del solicitante del préstamo
+    """
 
-	"""    
+    def __init__(self, idRegla):
+        Regla.__init__(self, idRegla)
 
-	def __init__(self,idRegla):
-		Regla.__init__(self,idRegla)
-  
+    def execute(self, persona, solicitud):
+        pm = solicitud.atCantidad.valor / solicitud.atTiempoDevolucion.valor
 
-	def execute(self,persona,solicitud):
+        asignado = False
+        solvencia_valor = ''
 
-		pm=solicitud.atCantidad.valor/solicitud.atTiempoDevolucion.valor
-		print(pm)
-		asignado=False
-		for i in persona.atributos:
-			if i.nombre == 'Sueldo Mensual':
-				if 4*pm <  i.valor:
-					for j in persona.atributos:
-						if j.nombre == 'Solvencia':
-							j.valor='Mucha'
-							asignado=True
-					if asignado == False:
-						persona.atSolvencia.valor='Mucha'
-						persona.atributos.append(persona.atSolvencia)
-				elif 2*pm <  i.valor:
-					for j in persona.atributos:
-						if j.nombre == 'Solvencia':
-							j.valor='Media'
-							asignado=True
-					if asignado == False:
-						persona.atSolvencia.valor='Media'
-						persona.atributos.append(persona.atSolvencia)
-				else:
-					for j in persona.atributos:
-						if j.nombre == 'Solvencia':
-							j.valor='Poca'
-							asignado=True
-					if asignado == False:
-						persona.atSolvencia.valor='Poca'
-						persona.atributos.append(persona.atSolvencia)
-                       
-		return persona
+        for i in persona.atributos:
+            if i.nombre == 'Sueldo Mensual':
+                sueldo_mensual = i.valor
+
+                if 4 * pm < sueldo_mensual:
+                    solvencia_valor = 'Mucha'
+                elif 2 * pm < sueldo_mensual:
+                    solvencia_valor = 'Media'
+                else:
+                    solvencia_valor = 'Poca'
+
+                asignar_solvencia(persona, solvencia_valor)
+
+        return persona
+
+
+def asignar_solvencia(persona, solvencia_valor):
+    asignado = False
+
+    for j in persona.atributos:
+        if j.nombre == 'Solvencia':
+            j.valor = solvencia_valor
+            asignado = True
+            break
+
+    if not asignado:
+        persona.atSolvencia.valor = solvencia_valor
+        persona.atributos.append(persona.atSolvencia)
+
    
 class AbstraerLimite(Regla):
-	"""
-	Regla basica para abstraer el limite minimo para la concesion del prestamo
-	"""   	
+    """
+    Regla básica para abstraer el límite mínimo para la concesión del préstamo
+    """
 
-	def __init__(self,idRegla):
-		Regla.__init__(self,idRegla)
-        
-	def execute(self,persona,solicitud):
-        
-		for i in solicitud.atributos:
-			if i.nombre == 'Cantidad':
-				if i.valor >= 12*persona.atSueldoMensual.valor:
-					solicitud.descripcion+='Para una cantidad de '+str(i.valor)+' y un sueldo mensual de '+str(persona.atSueldoMensual.valor)+' se requiere un minimo de 0.9 puntos de valoracion para conceder el prestamo\n'
-					asignado=False
-					for j in solicitud.atributos:
-						if j.nombre == 'ValorLimite':
-							j.valor=0.9
-							asignado = True
-					if asignado == False:
-						solicitud.valorLimite.valor=0.9
-						solicitud.atributos.append(solicitud.valorLimite)
-				elif i.valor >= 6*persona.atSueldoMensual.valor:
-					solicitud.descripcion+='Para una cantidad de '+str(i.valor)+' y un sueldo mensual de '+str(persona.atSueldoMensual.valor)+' se requiere un minimo de 0.7 puntos de valoracion para conceder el prestamo\n'
-					asignado=False
-					for j in solicitud.atributos:
-						if j.nombre == 'ValorLimite':
-							j.valor=0.7
-							asignado = True
-					if asignado == False:
-						solicitud.valorLimite.valor=0.7
-						solicitud.atributos.append(solicitud.valorLimite)
-				elif i.valor >= 3*persona.atSueldoMensual.valor:
-					solicitud.descripcion+='Para una cantidad de '+str(i.valor)+' y un sueldo mensual de '+str(persona.atSueldoMensual.valor)+' se requiere un minimo de 0.5 puntos de valoracion para conceder el prestamo\n'
-					asignado=False
-					for j in solicitud.atributos:
-						if j.nombre == 'ValorLimite':
-							j.valor=0.6
-							asignado = True
-					if asignado == False:
-						solicitud.valorLimite.valor=0.5
-						solicitud.atributos.append(solicitud.valorLimite)
-				elif i.valor < 3*persona.atSueldoMensual.valor:
-					solicitud.descripcion+='Para una cantidad de '+str(i.valor)+' y un sueldo mensual de '+str(persona.atSueldoMensual.valor)+' se requiere un minimo de 0.5 puntos de valoracion para conceder el prestamo\n'
-					asignado=False
-					for j in solicitud.atributos:
-						if j.nombre == 'ValorLimite':
-							j.valor=0.5
-							asignado = True
-					if asignado == False:
-						solicitud.valorLimite.valor=0.5
-						solicitud.atributos.append(solicitud.valorLimite)
-                   
-        
-		return solicitud
-        
+    def __init__(self, idRegla):
+        Regla.__init__(self, idRegla)
+
+    def execute(self, persona, solicitud):
+        cantidad = solicitud.atCantidad.valor
+        sueldo_mensual = persona.atSueldoMensual.valor
+
+        if cantidad >= 12 * sueldo_mensual:
+            self.asignar_valor_limite(solicitud, 0.9)
+        elif cantidad >= 6 * sueldo_mensual:
+            self.asignar_valor_limite(solicitud, 0.7)
+        elif cantidad >= 3 * sueldo_mensual:
+            self.asignar_valor_limite(solicitud, 0.6)
+        else:
+            self.asignar_valor_limite(solicitud, 0.5)
+
+        return solicitud
+
+    def asignar_valor_limite(self, solicitud, valor):
+        asignado = False
+
+        for atributo in solicitud.atributos:
+            if atributo.nombre == 'ValorLimite':
+                atributo.valor = valor
+                asignado = True
+                break
+
+        if not asignado:
+            solicitud.valorLimite.valor = valor
+            solicitud.atributos.append(solicitud.valorLimite)
+
         
