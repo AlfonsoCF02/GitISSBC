@@ -19,7 +19,7 @@ def eventoValorar(persona, solicitud):
     de la persona indicada junto con la solicitud
 
     @param persona: Persona solicitante
-    @param solicitud: Solicitud realizada
+    @param solicitud: Solicitud realizada 
     """
     
     mp = ma.DecidirCaso(persona, solicitud)
