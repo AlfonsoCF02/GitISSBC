@@ -48,8 +48,6 @@ class ValoracionDlg(QtWidgets.QWidget):
 
     # Datos abstraidos
         self.tableWidgetDatosAbstraidos = QtWidgets.QTableWidget(len(self.persona.atributos) + len(self.solicitud.atributos), 2)
-        self.tableWidgetDatosAbstraidos.setColumnWidth(0, 240)
-        self.tableWidgetDatosAbstraidos.setColumnWidth(1, 300)
         self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(header)
 
     # Decision
@@ -78,13 +76,13 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.comboBoxDominio.activated[str].connect(self.dominioModificado)
 
     # Botones
-        self.valorarButtom = QPushButton(QIcon("./Valorar.png"), "Valorar", self)
+        self.valorarButtom = QPushButton(QIcon("./icons/Valorar.png"), "Valorar", self)
         self.valorarButtom.setShortcut("Ctrl+v")
         
-        self.borrarButtom = QPushButton(QIcon("./Delete.png"), "Borrar", self)
+        self.borrarButtom = QPushButton(QIcon("./icons/Delete.png"), "Borrar", self)
         self.borrarButtom.setShortcut("Ctrl+b")
         
-        self.salirButtom = QPushButton(QIcon("./exit24.png"), "Salir", self)
+        self.salirButtom = QPushButton(QIcon("./icons/exit24.png"), "Salir", self)
         self.salirButtom.setShortcut("Ctrl+s")
     
     # Widgets Verticales Derecha
