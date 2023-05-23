@@ -12,7 +12,7 @@ Base de conocimiento de valoracion de Becas
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton,QHeaderView
 from PyQt5.QtGui import QIcon
 
 from bcValoracion import *
@@ -101,7 +101,17 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.grid.addWidget(self.tableWidgetSolicitud, 5, 0)
         self.grid.addWidget(self.tableWidgetSolicitudp, 5, 0)
         self.tableWidgetSolicitudp.hide()
-
+        
+        # Hacer que las columnas de la tablas deocupen todo el espacio disponible
+        self.tableWidgetSolicitud.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetSolicitud.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidgetSolicitudp.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetSolicitudp.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidgetPersona.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetPersona.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidgetPersonap.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetPersonap.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+                                                                          
         self.grid.addWidget(labelTextDecision, 6, 0)
         self.grid.addWidget(self.plainTextEditDecision, 7, 0)
 
@@ -218,6 +228,10 @@ class ValoracionDlg(QtWidgets.QWidget):
             self.tableWidgetDatosAbstraidos.setItem(i, 1, valor)
         
         self.grid.addWidget(self.tableWidgetDatosAbstraidos, 1, 1, 5, 1)
+        
+        # Hacer que las columnas de la tablas deocupen todo el espacio disponible
+        self.tableWidgetDatosAbstraidos.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetDatosAbstraidos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
 
     
