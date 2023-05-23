@@ -79,15 +79,15 @@ class Criterio(Regla):
 
         solvencia = persona.atSolvencia.valor
         if solvencia == 'Mucha':
-            solicitud.descripcion += 'El atributo ' + persona.atSolvencia.nombre + ' con valor ' + solvencia + ' proporciona 0.7 puntos de valoración\n'
+            solicitud.descripcion += 'La propiedad ' + persona.atSolvencia.nombre + ' con valor ' + solvencia + ' añade 0.7 puntos a la valoración\n'
             valor += 0.7
 
         situacion_laboral = persona.atSituacionLaboral.valor
         if situacion_laboral == 'Trabajo Fijo':
-            solicitud.descripcion += 'El atributo ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' proporciona 0.4 puntos de valoración\n'
+            solicitud.descripcion += 'La propiedad ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' añade 0.4 puntos a la valoración\n'
             valor += 0.4
         elif situacion_laboral == 'Trabajo Temporal':
-            solicitud.descripcion += 'El atributo ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' proporciona 0.2 puntos de valoración\n'
+            solicitud.descripcion += 'La propiedad ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' añade 0.2 puntos a la valoración\n'
             valor += 0.2
 
         return valor, solicitud
@@ -176,11 +176,11 @@ class AbstraerLimite(Regla):
         cantidad = solicitud.atCantidad.valor
         sueldo_mensual = persona.atSueldoMensual.valor
 
-        if cantidad >= 12 * sueldo_mensual:
+        if cantidad >= 14 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.9)
-        elif cantidad >= 6 * sueldo_mensual:
+        elif cantidad >= 8 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.7)
-        elif cantidad >= 3 * sueldo_mensual:
+        elif cantidad >= 5 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.6)
         else:
             self.asignar_valor_limite(solicitud, 0.5)
