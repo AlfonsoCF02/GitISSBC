@@ -145,7 +145,7 @@ class AbstraerLimite(Regla):
                 asignado = False
                 if tipo_beca == 'General':
                     descripcion = 'A la beca de tipo general requiere un mínimo de 1.0 puntos de valoración para ser concedida\n'
-                    valor_limite = 0.7
+                    valor_limite = 1
                 elif tipo_beca == 'Movilidad':
                     descripcion = 'A la beca de tipo movilidad requiere un mínimo de 0.5 puntos de valoración para ser concedida\n'
                     valor_limite = 0.5

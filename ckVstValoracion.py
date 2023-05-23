@@ -30,7 +30,7 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.solicitudp = bccv.Solicitud()
         self.dominio = 'Becas'
 
-        # Label
+    # Label
         self.labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos del Solicitante", self)
         self.labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la solicitud", self)
         self.labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos Abstraidos", self)
@@ -39,29 +39,37 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.labelTextDecision = QtWidgets.QLabel("Decisión", self)
         self.labelTextExplicacion = QtWidgets.QLabel("Explicacion", self)
 
-        # Widget
+    # Widget
         header = ['ATRIBUTO', 'VALOR']
 
         self.rellenaDatosPersonales()
 
         self.rellenaDatosSolicitud()
 
-        # Datos abstraidos
+    # Datos abstraidos
         self.tableWidgetDatosAbstraidos = QtWidgets.QTableWidget(len(self.persona.atributos) + len(self.solicitud.atributos), 2)
         self.tableWidgetDatosAbstraidos.setColumnWidth(0, 240)
         self.tableWidgetDatosAbstraidos.setColumnWidth(1, 300)
         self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(header)
 
-        # Decision
+    # Decision
         self.plainTextEditDecision = QtWidgets.QPlainTextEdit()
         self.plainTextEditDecision = QtWidgets.QPlainTextEdit(self)
         font = QtGui.QFont()
         font.setPointSize(50)
         self.plainTextEditDecision.setFont(font)
-
+        self.plainTextEditDecision.setStyleSheet("QPlainTextEdit { background-color: #f2f2f2 }")
+        self.plainTextEditDecision.setReadOnly(True)
         
-        # Explicación
+        
+    # Explicación
         self.plainTextEditExplicacion = QtWidgets.QPlainTextEdit()
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.plainTextEditExplicacion.setFont(font)
+        self.plainTextEditExplicacion.setStyleSheet("QPlainTextEdit { background-color: #f2f2f2 }")
+        self.plainTextEditExplicacion.setReadOnly(True)
+        
 
         self.labelComboBoxDominio = QtWidgets.QLabel("Dominio", self)
         self.comboBoxDominio = QtWidgets.QComboBox()
@@ -69,7 +77,7 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.comboBoxDominio.addItem('Prestamos')
         self.comboBoxDominio.activated[str].connect(self.dominioModificado)
 
-        # Botones
+    # Botones
         self.valorarButtom = QPushButton(QIcon("./Valorar.png"), "Valorar", self)
         self.valorarButtom.setShortcut("Ctrl+v")
         
@@ -128,15 +136,16 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.tableWidgetPersona.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidgetPersonap.horizontalHeader().setStretchLastSection(True)
         self.tableWidgetPersonap.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidgetDatosAbstraidos.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetDatosAbstraidos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
 
-        # Dimensiones de la ventana
+    # Dimensiones de la ventana
         self.setGeometry(150, 150, 1700, 900)
         self.setWindowTitle("TAREA DE VALORACIÓN")
         self.showMaximized()
 
-        # Conexiones:
-        # ==========
+    # Conexiones:
         self.valorarButtom.clicked.connect(self.valorar)
         self.salirButtom.clicked.connect(self.close)
         self.borrarButtom.clicked.connect(self.borrarInterfaz)
@@ -231,12 +240,6 @@ class ValoracionDlg(QtWidgets.QWidget):
             valor = QtWidgets.QTableWidgetItem(str(atributo.valor))
             valor.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
             self.tableWidgetDatosAbstraidos.setItem(i, 1, valor)
-        
-        
-        # Hacer que las columnas de la tablas deocupen todo el espacio disponible
-        self.tableWidgetDatosAbstraidos.horizontalHeader().setStretchLastSection(True)
-        self.tableWidgetDatosAbstraidos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
 
     
     def center(self):
