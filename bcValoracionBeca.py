@@ -62,11 +62,11 @@ class Persona(Clase):
 class Criterio(Regla):
     """
     Define el criterio que seguirá el sistema para aceptar o denegar una beca
-    @param: Creditos >= 80 +0.2
-    @param: Creditos >= 65 y < 80 +0.2
-    @param: Nota >= 6.5 +0.2
-    @param: Renta <= 20000 +0.2
-    @param: Independencia == True +0.2
+    @param: Creditos >= 95 +0.7
+    @param: Creditos >= 80 y < 95 +0.3
+    @param: Nota >= 7 +0.4
+    @param: Renta <= 25000 +0.7
+    @param: Independencia == True +0.3
     @return: valor total de la solicitud.
     """
 
@@ -76,30 +76,30 @@ class Criterio(Regla):
     def execute(self, persona, solicitud):
         valor = 0.0
         for at in persona.atributos:
-            if at.nombre == '%Creditos' and at.valor >= 80:
-                descripcion = f"El atributo {at.nombre} con valor {at.valor} aporta 0.7 puntos de valoración\n"
-                solicitud.descripcion += descripcion
-                valor += 0.7
-
-            if at.nombre == '%Creditos' and 65 <= at.valor < 80:
-                descripcion = f"El atributo {at.nombre} con valor {at.valor} aporta 0.3 puntos de valoración\n"
-                solicitud.descripcion += descripcion
-                valor += 0.3
-
-            if at.nombre == 'Nota' and at.valor >= 6.5:
-                descripcion = f"El atributo {at.nombre} con valor {at.valor} aporta 0.4 puntos de valoración\n"
-                solicitud.descripcion += descripcion
-                valor += 0.4
-
-            if at.nombre == 'Renta' and at.valor <= 20000:
-                descripcion = f"El atributo {at.nombre} con valor {at.valor} aporta 0.7 puntos de valoración\n"
+            if at.nombre == 'Renta' and at.valor <= 25000:
+                descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.7 puntos a la valoración\n"
                 solicitud.descripcion += descripcion
                 valor += 0.7
 
             if at.nombre == 'Independencia' and at.valor == True:
-                descripcion = f"El atributo {at.nombre} con valor {at.valor} aporta 0.3 puntos de valoración\n"
+                descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.3 puntos a la valoración\n"
                 solicitud.descripcion += descripcion
                 valor += 0.3
+                
+            if at.nombre == '%Creditos' and at.valor >= 95:
+                descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.7 puntos a la valoración\n"
+                solicitud.descripcion += descripcion
+                valor += 0.7
+
+            if at.nombre == '%Creditos' and 80 <= at.valor < 95:
+                descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.3 puntos a la valoración\n"
+                solicitud.descripcion += descripcion
+                valor += 0.3
+
+            if at.nombre == 'Nota' and at.valor >= 7:
+                descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.4 puntos a la valoración\n"
+                solicitud.descripcion += descripcion
+                valor += 0.4
 
         solicitud.descripcion += f"El valor total de la solicitud obtenido es {valor}\n"
         return valor, solicitud
@@ -144,13 +144,13 @@ class AbstraerLimite(Regla):
                 tipo_beca = i.valor
                 asignado = False
                 if tipo_beca == 'General':
-                    descripcion = 'A la beca de tipo general requiere un mínimo de 0.7 puntos de valoración para ser concedida\n'
+                    descripcion = 'Para obtener la beca general, es necesario contar con una valoración mínima de 0.7 puntos\n'
                     valor_limite = 0.7
                 elif tipo_beca == 'Movilidad':
-                    descripcion = 'A la beca de tipo movilidad requiere un mínimo de 0.5 puntos de valoración para ser concedida\n'
+                    descripcion = 'Para obtener la beca de movilidad, es necesario contar con una valoración mínima de 0.5 puntos\n'
                     valor_limite = 0.5
                 elif tipo_beca == 'Especial':
-                    descripcion = 'A la beca de tipo especial requiere un mínimo de 0.9 puntos de valoración para ser concedida\n'
+                    descripcion = 'Para obtener la beca especial, es necesario contar con una valoración mínima de 0.9 puntos\n'
                     valor_limite = 0.9
 
                 for j in solicitud.atributos:
