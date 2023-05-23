@@ -32,12 +32,12 @@ class ValoracionDlg(QtWidgets.QWidget):
 
     # Label
         self.labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos del Solicitante", self)
-        self.labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la solicitud", self)
+        self.labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la Solicitud", self)
         self.labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos Abstraidos", self)
 
 
         self.labelTextDecision = QtWidgets.QLabel("Decisión", self)
-        self.labelTextExplicacion = QtWidgets.QLabel("Explicacion", self)
+        self.labelTextExplicacion = QtWidgets.QLabel("Explicación", self)
 
     # Widget
         header = ['ATRIBUTO', 'VALOR']
@@ -261,8 +261,10 @@ class ValoracionDlg(QtWidgets.QWidget):
             
             if resultado:
                 self.plainTextEditDecision.insertPlainText("Concedida")
+                self.plainTextEditDecision.setStyleSheet("QPlainTextEdit { background-color: #f2f2f2; color: green }")
             else:
                 self.plainTextEditDecision.insertPlainText("Denegada")
+                self.plainTextEditDecision.setStyleSheet("QPlainTextEdit { background-color: #f2f2f2; color: red }")
                 
             self.plainTextEditExplicacion.insertPlainText(descripcion)
             self.rellenaAbstraidos()
