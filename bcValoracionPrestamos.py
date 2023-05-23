@@ -176,11 +176,11 @@ class AbstraerLimite(Regla):
         cantidad = solicitud.atCantidad.valor
         sueldo_mensual = persona.atSueldoMensual.valor
 
-        if cantidad >= 14 * sueldo_mensual:
+        if cantidad >= 7 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.9)
-        elif cantidad >= 8 * sueldo_mensual:
+        elif cantidad >= 4 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.7)
-        elif cantidad >= 5 * sueldo_mensual:
+        elif cantidad >= 2 * sueldo_mensual:
             self.asignar_valor_limite(solicitud, 0.6)
         else:
             self.asignar_valor_limite(solicitud, 0.5)

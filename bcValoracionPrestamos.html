@@ -13,7 +13,7 @@
 &nbsp;<br>
 Base&nbsp;de&nbsp;conocimiento&nbsp;de&nbsp;valoracion&nbsp;de&nbsp;Prestamos<br>
 &nbsp;<br>
-@author:&nbsp;Alfonso&nbsp;Cabezas&nbsp;Fernández</tt></p>
+@author:&nbsp;Abraham&nbsp;Córdoba&nbsp;Pérez</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -57,7 +57,7 @@ Base&nbsp;de&nbsp;conocimiento&nbsp;de&nbsp;valoracion&nbsp;de&nbsp;Prestamos<br
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#AbstraerLimite">AbstraerLimite</a>(idRegla)<br>
 &nbsp;<br>
-<a href="bcValoracion.html#Regla">Regla</a>&nbsp;basica&nbsp;para&nbsp;abstraer&nbsp;el&nbsp;limite&nbsp;minimo&nbsp;para&nbsp;la&nbsp;concesion&nbsp;del&nbsp;prestamo<br>&nbsp;</tt></td></tr>
+<a href="bcValoracion.html#Regla">Regla</a>&nbsp;básica&nbsp;para&nbsp;abstraer&nbsp;el&nbsp;límite&nbsp;mínimo&nbsp;para&nbsp;la&nbsp;concesión&nbsp;del&nbsp;préstamo<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="bcValoracionPrestamos.html#AbstraerLimite">AbstraerLimite</a></dd>
@@ -67,6 +67,8 @@ Base&nbsp;de&nbsp;conocimiento&nbsp;de&nbsp;valoracion&nbsp;de&nbsp;Prestamos<br
 <hr>
 Methods defined here:<br>
 <dl><dt><a name="AbstraerLimite-__init__"><strong>__init__</strong></a>(self, idRegla)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="AbstraerLimite-asignar_valor_limite"><strong>asignar_valor_limite</strong></a>(self, solicitud, valor)</dt></dl>
 
 <dl><dt><a name="AbstraerLimite-execute"><strong>execute</strong></a>(self, persona, solicitud)</dt></dl>
 
@@ -87,7 +89,7 @@ Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.R
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#AbstraerSolvencia">AbstraerSolvencia</a>(idRegla)<br>
 &nbsp;<br>
-<a href="bcValoracion.html#Regla">Regla</a>&nbsp;basica&nbsp;para&nbsp;abstraer&nbsp;la&nbsp;solvencia&nbsp;del&nbsp;solicitante&nbsp;del&nbsp;prestamo<br>&nbsp;</tt></td></tr>
+<a href="bcValoracion.html#Regla">Regla</a>&nbsp;básica&nbsp;para&nbsp;abstraer&nbsp;la&nbsp;solvencia&nbsp;del&nbsp;solicitante&nbsp;del&nbsp;préstamo<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="bcValoracionPrestamos.html#AbstraerSolvencia">AbstraerSolvencia</a></dd>
@@ -117,9 +119,9 @@ Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.R
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#AbstraerSueldoMensual">AbstraerSueldoMensual</a>(idRegla)<br>
 &nbsp;<br>
-<a href="bcValoracion.html#Regla">Regla</a>&nbsp;basica&nbsp;para&nbsp;abstraer&nbsp;el&nbsp;sueldo&nbsp;mensual&nbsp;del&nbsp;solicitante&nbsp;del&nbsp;prestamo<br>
+<a href="bcValoracion.html#Regla">Regla</a>&nbsp;básica&nbsp;para&nbsp;abstraer&nbsp;el&nbsp;sueldo&nbsp;mensual&nbsp;del&nbsp;solicitante&nbsp;del&nbsp;préstamo<br>
 @param:&nbsp;sueldoAnual<br>
-@return:&nbsp;sueldo&nbsp;de&nbsp;la&nbsp;persona<br>&nbsp;</tt></td></tr>
+@return:&nbsp;sueldo&nbsp;mensual&nbsp;de&nbsp;la&nbsp;persona<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="bcValoracionPrestamos.html#AbstraerSueldoMensual">AbstraerSueldoMensual</a></dd>
@@ -149,8 +151,8 @@ Data descriptors inherited from <a href="bcValoracion.html#Regla">bcValoracion.R
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#Criterio">Criterio</a>(idRegla)<br>
 &nbsp;<br>
-Requisitos&nbsp;aplicados&nbsp;para&nbsp;valorar&nbsp;la&nbsp;concesion&nbsp;de&nbsp;un&nbsp;prestamo<br>
-@return:&nbsp;valor&nbsp;calculado&nbsp;para&nbsp;ver&nbsp;si&nbsp;es&nbsp;solvente&nbsp;o&nbsp;no.<br>&nbsp;</tt></td></tr>
+Requisitos&nbsp;aplicados&nbsp;para&nbsp;valorar&nbsp;la&nbsp;concesión&nbsp;de&nbsp;un&nbsp;préstamo<br>
+@return:&nbsp;valor&nbsp;calculado&nbsp;para&nbsp;determinar&nbsp;si&nbsp;es&nbsp;solvente&nbsp;o&nbsp;no.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="bcValoracionPrestamos.html#Criterio">Criterio</a></dd>
@@ -219,9 +221,9 @@ Data descriptors inherited from <a href="bcValoracion.html#Clase">bcValoracion.C
 <td colspan=2><tt><a href="#Solicitud">Solicitud</a>(nombre=None)<br>
 &nbsp;<br>
 <a href="bcValoracion.html#Clase">Clase</a>&nbsp;para&nbsp;la&nbsp;representacion&nbsp;de&nbsp;la&nbsp;solicitud&nbsp;de&nbsp;un&nbsp;prestamo<br>
-@param:&nbsp;Motivo:&nbsp;Compra&nbsp;casa,&nbsp;cambio&nbsp;coche,&nbsp;estudios<br>
+@param:&nbsp;Motivo:&nbsp;Compra&nbsp;piso,&nbsp;cambio&nbsp;coche,&nbsp;estudios<br>
 @param:&nbsp;Cantidad:&nbsp;cantidad&nbsp;solcitada<br>
-@param:&nbsp;TiempoDevolucion:&nbsp;tiempo&nbsp;de&nbsp;devolucion&nbsp;del&nbsp;prestamo<br>
+@param:&nbsp;TiempoDevolucion&nbsp;(meses):&nbsp;tiempo&nbsp;de&nbsp;devolucion&nbsp;del&nbsp;prestamo&nbsp;en&nbsp;meses<br>
 @param:&nbsp;Valor&nbsp;Limite:&nbsp;valor&nbsp;maximo&nbsp;del&nbsp;prestamo.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -243,5 +245,13 @@ Data descriptors inherited from <a href="bcValoracion.html#Clase">bcValoracion.C
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
-</td></tr></table></td></tr></table>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-asignar_solvencia"><strong>asignar_solvencia</strong></a>(persona, solvencia_valor)</dt></dl>
+</td></tr></table>
 </body></html>
