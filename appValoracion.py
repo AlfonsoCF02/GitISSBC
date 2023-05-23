@@ -2,7 +2,7 @@
 """
 Created on Mon May 22 19:22:19 2023
 
-@author: Alfonso Manuel de la Torre Osuna
+@author: Abraham Córdoba Pérez
 """
 
 

@@ -3,7 +3,7 @@ Created on Mon May 22 19:22:19 2023
 
 Base de conocimiento de valoracion de Becas
 
-@author: Abraham Córdoba
+@author: Abraham Córdoba Pérez
 """
 
 

@@ -3,7 +3,7 @@ Created on Mon May 22 19:22:19 2023
 
 Base de conocimiento de valoracion de Prestamos
 
-@author: Alfonso Cabezas Fernández
+@author: Abraham Córdoba Pérez
 """
 
 from bcValoracion import *
