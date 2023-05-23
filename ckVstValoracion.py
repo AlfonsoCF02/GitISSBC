@@ -72,7 +72,7 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.valorarButtom.setShortcut("Ctrl+v")
         
         self.borrarButtom = QPushButton(QIcon("./Delete.png"), "Borrar", self)
-        self.borrarButtom.setShortcut("Ctrl+v")
+        self.borrarButtom.setShortcut("Ctrl+b")
         
         self.salirButtom = QPushButton(QIcon("./exit24.png"), "Salir", self)
         self.salirButtom.setShortcut("Ctrl+s")
@@ -88,25 +88,25 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.grid = QtWidgets.QGridLayout()
         self.grid.setSpacing(5)
 
-        self.grid.addWidget(labelComboBoxDominio, 6, 0)
-        self.grid.addWidget(self.comboBoxDominio, 7, 0)
+        self.grid.addWidget(labelComboBoxDominio, 0, 0)
+        self.grid.addWidget(self.comboBoxDominio, 1, 0)
 
-        self.grid.addWidget(labelTableWidgetDatosPersonales, 0, 0)
-        self.grid.addWidget(self.tableWidgetPersona, 1, 0)
-        self.grid.addWidget(self.tableWidgetPersonap, 1, 0)
+        self.grid.addWidget(labelTableWidgetDatosPersonales, 2, 0)
+        self.grid.addWidget(self.tableWidgetPersona, 3, 0)
+        self.grid.addWidget(self.tableWidgetPersonap, 3, 0)
         self.tableWidgetPersonap.hide()
         self.grid.addWidget(labelTableWidgetDatosAbstraidos, 0, 1)
 
-        self.grid.addWidget(labelTableWidgetDatosSolicitud, 2, 0)
-        self.grid.addWidget(self.tableWidgetSolicitud, 3, 0)
-        self.grid.addWidget(self.tableWidgetSolicitudp, 3, 0)
+        self.grid.addWidget(labelTableWidgetDatosSolicitud, 4, 0)
+        self.grid.addWidget(self.tableWidgetSolicitud, 5, 0)
+        self.grid.addWidget(self.tableWidgetSolicitudp, 5, 0)
         self.tableWidgetSolicitudp.hide()
 
-        self.grid.addWidget(labelTextDecision, 4, 0)
-        self.grid.addWidget(self.plainTextEditDecision, 5, 0)
+        self.grid.addWidget(labelTextDecision, 6, 0)
+        self.grid.addWidget(self.plainTextEditDecision, 7, 0)
 
-        self.grid.addWidget(labelTextExplicacion, 4, 1)
-        self.grid.addWidget(self.plainTextEditExplicacion, 5, 1, 3, 1)
+        self.grid.addWidget(labelTextExplicacion, 6, 1)
+        self.grid.addWidget(self.plainTextEditExplicacion, 7, 1)
 
         # Diseño principal
         mainLayout = QtWidgets.QVBoxLayout()
@@ -217,7 +217,7 @@ class ValoracionDlg(QtWidgets.QWidget):
             valor.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
             self.tableWidgetDatosAbstraidos.setItem(i, 1, valor)
         
-        self.grid.addWidget(self.tableWidgetDatosAbstraidos, 1, 1, 3, 1)
+        self.grid.addWidget(self.tableWidgetDatosAbstraidos, 1, 1, 5, 1)
 
 
     
