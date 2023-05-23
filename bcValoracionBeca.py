@@ -151,7 +151,7 @@ class AbstraerLimite(Regla):
                     valor_limite = 0.5
                 elif tipo_beca == 'Especial':
                     descripcion = 'Para obtener la beca especial, es necesario contar con una valoración mínima de 0.9 puntos\n'
-                    valor_limite = 0.9
+                    valor_limite = 1.1
 
                 for j in solicitud.atributos:
                     if j.nombre == 'ValorLimite':
