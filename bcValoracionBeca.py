@@ -24,7 +24,7 @@ class Solicitud(Clase):
 
         Clase.__init__(self, nombre=nombre)
 
-        self.atTipo = Atributo('Tipo', 'multiple', None, None, ['General', 'Movilidad', 'Especial'])
+        self.atTipo = Atributo('Tipo', 'multiple', None, None, ['MEC', 'Erasmus', 'Santander'])
         self.valorLimite = Atributo('ValorLimite', 'float', None)
         self.atributos = [self.atTipo]
         self.criterio = Criterio("criterio")
@@ -50,11 +50,10 @@ class Persona(Clase):
         self.atAsignaturasCursadas = Atributo('Cursadas', 'int', None)
         self.atAsignaturasAprobadas = Atributo('Aprobadas', 'int', None)
         self.atCreditosAprobados = Atributo('%Creditos', 'float', None)
-        self.atNotaMedia = Atributo('Nota', 'float', None)
-        self.atIndependiente = Atributo('Independencia', 'boleano', None, )
+        self.atNotaMedia = Atributo('MediaExpediente', 'float', None)
+        self.atIndependiente = Atributo('Independiente', 'boleano', None, )
         # Se establece la lista de atributos que posee esta clase
-        self.atributos = [self.atRenta, self.atAsignaturasAprobadas, self.atAsignaturasCursadas, self.atNotaMedia,
-                          self.atIndependiente]
+        self.atributos = [self.atNotaMedia, self.atIndependiente, self.atRenta, self.atAsignaturasAprobadas, self.atAsignaturasCursadas]
         r1 = AbstraerPorcentaje('r1')
         self.reglas = [r1]
 
@@ -64,9 +63,9 @@ class Criterio(Regla):
     Define el criterio que seguirá el sistema para aceptar o denegar una beca
     @param: Creditos >= 95 +0.7
     @param: Creditos >= 80 y < 95 +0.3
-    @param: Nota >= 7 +0.4
+    @param: MediaExpediente >= 7 +0.4
     @param: Renta <= 25000 +0.7
-    @param: Independencia == True +0.3
+    @param: Independiente == True +0.3
     @return: valor total de la solicitud.
     """
 
@@ -81,7 +80,7 @@ class Criterio(Regla):
                 solicitud.descripcion += descripcion
                 valor += 0.7
 
-            if at.nombre == 'Independencia' and at.valor == True:
+            if at.nombre == 'Independiente' and at.valor == True:
                 descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.3 puntos a la valoración\n"
                 solicitud.descripcion += descripcion
                 valor += 0.3
@@ -96,7 +95,7 @@ class Criterio(Regla):
                 solicitud.descripcion += descripcion
                 valor += 0.3
 
-            if at.nombre == 'Nota' and at.valor >= 7:
+            if at.nombre == 'MediaExpediente' and at.valor >= 7:
                 descripcion = f"La propiedad {at.nombre} con valor {at.valor} añade 0.4 puntos a la valoración\n"
                 solicitud.descripcion += descripcion
                 valor += 0.4
@@ -143,14 +142,14 @@ class AbstraerLimite(Regla):
             if i.nombre == 'Tipo':
                 tipo_beca = i.valor
                 asignado = False
-                if tipo_beca == 'General':
-                    descripcion = 'Para obtener la beca general, es necesario contar con una valoración mínima de 0.7 puntos\n'
+                if tipo_beca == 'MEC':
+                    descripcion = 'Para obtener la beca MEC, es necesario contar con una valoración mínima de 0.7 puntos\n'
                     valor_limite = 0.7
-                elif tipo_beca == 'Movilidad':
-                    descripcion = 'Para obtener la beca de movilidad, es necesario contar con una valoración mínima de 0.5 puntos\n'
+                elif tipo_beca == 'Erasmus':
+                    descripcion = 'Para obtener la beca Erasmus, es necesario contar con una valoración mínima de 0.5 puntos\n'
                     valor_limite = 0.5
-                elif tipo_beca == 'Especial':
-                    descripcion = 'Para obtener la beca especial, es necesario contar con una valoración mínima de 0.9 puntos\n'
+                elif tipo_beca == 'Santander':
+                    descripcion = 'Para obtener la beca Santander, es necesario contar con una valoración mínima de 0.9 puntos\n'
                     valor_limite = 1.1
 
                 for j in solicitud.atributos:

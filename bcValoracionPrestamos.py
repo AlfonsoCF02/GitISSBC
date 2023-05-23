@@ -12,9 +12,9 @@ from bcValoracion import *
 class Solicitud(Clase):
 	"""
 	Clase para la representacion de la solicitud de un prestamo
-	@param: Motivo: Compra casa, cambio coche, estudios
+	@param: Motivo: Compra piso, cambio coche, estudios
 	@param: Cantidad: cantidad solcitada
-	@param: TiempoDevolucion: tiempo de devolucion del prestamo
+	@param: TiempoDevolucion (meses): tiempo de devolucion del prestamo en meses
 	@param: Valor Limite: valor maximo del prestamo.
 	"""
 		
@@ -22,9 +22,9 @@ class Solicitud(Clase):
 	def __init__(self,nombre=None):
 		Clase.__init__(self,nombre=nombre)
         
-		self.atMotivo=Atributo('Motivo','multiple',None, None,['Compra de Casa','Cambio Coche','Estudios'])
+		self.atMotivo=Atributo('Motivo','multiple',None, None,['Adquirir Vivienda','Adquirir Vehículo','Boda'])
 		self.atCantidad=Atributo('Cantidad','int',None)
-		self.atTiempoDevolucion=Atributo('Tiempo Devolucion','int',None)
+		self.atTiempoDevolucion=Atributo('Tiempo Devolucion (meses)','int',None)
 		self.valorLimite=Atributo('ValorLimite','float',None)        
 		self.atributos=[self.atMotivo,self.atCantidad,self.atTiempoDevolucion]
 		self.criterio=Criterio("criterio")
@@ -53,13 +53,13 @@ class Persona(Clase):
 
 		self.atNombre=Atributo('Nombre','str',None)
 		self.atApellidos=Atributo('Apellidos','str',None)
-		self.atSueldoMensual=Atributo('Sueldo Mensual','float', None)
-		self.atSueldoAnual=Atributo('Sueldo Anual','float',None)
-		self.atSituacionLaboral=Atributo('Situacion Laboral','multiple',None,None,['Parado','Trabajo Temporal','Trabajo Fijo'])
+		self.atSueldoMensual=Atributo('Sueldo Mes','float', None)
+		self.atSueldoAnual=Atributo('Sueldo Año','float',None)
+		self.atSituacionLaboral=Atributo('Situacion Laboral','multiple',None,None,['Desempleado','Contrato Temporal','Contrato Indefinido'])
 		self.atRiesgo=Atributo('Riesgo','multiple',None,None,['Alto','Medio','Bajo'])
 		self.atSolvencia=Atributo('Solvencia','multiple',None,None,['Mucha','Poca','Media'])
 		#Se establece la lista de atributos que posee esta clase
-		self.atributos=[self.atNombre,self.atApellidos,self.atSueldoAnual,self.atSituacionLaboral]
+		self.atributos=[self.atSueldoAnual,self.atSituacionLaboral,self.atNombre,self.atApellidos]
 		r2= AbstraerSolvencia('r2')
 		r1= AbstraerSueldoMensual('r1')        
 		self.reglas=[r1,r2]
@@ -83,10 +83,10 @@ class Criterio(Regla):
             valor += 0.7
 
         situacion_laboral = persona.atSituacionLaboral.valor
-        if situacion_laboral == 'Trabajo Fijo':
+        if situacion_laboral == 'Contrato Indefinido':
             solicitud.descripcion += 'La propiedad ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' añade 0.4 puntos a la valoración\n'
             valor += 0.4
-        elif situacion_laboral == 'Trabajo Temporal':
+        elif situacion_laboral == 'Contrato Temporal':
             solicitud.descripcion += 'La propiedad ' + persona.atSituacionLaboral.nombre + ' con valor ' + situacion_laboral + ' añade 0.2 puntos a la valoración\n'
             valor += 0.2
 
@@ -110,7 +110,7 @@ class AbstraerSueldoMensual(Regla):
         print(mensual)
         asignado = False
         for i in persona.atributos:
-            if i.nombre == 'Sueldo Mensual':
+            if i.nombre == 'Sueldo Mes':
                 i.valor = mensual
                 asignado = True
         if not asignado:
@@ -135,7 +135,7 @@ class AbstraerSolvencia(Regla):
         solvencia_valor = ''
 
         for i in persona.atributos:
-            if i.nombre == 'Sueldo Mensual':
+            if i.nombre == 'Sueldo Mes':
                 sueldo_mensual = i.valor
 
                 if 4 * pm < sueldo_mensual:
