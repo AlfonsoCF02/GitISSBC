@@ -3,7 +3,7 @@ Created on Mon May 22 19:22:19 2023
 
 Base de conocimiento de valoracion de Becas
 
-@author: Alfonso de la Torre
+@author: Alfonso Cabezas Fernández
 """
 
 #!/usr/bin/env python
@@ -125,172 +125,100 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.valorarButtom.clicked.connect(self.valorar)
         self.salirButtom.clicked.connect(self.close)
         self.borrarButtom.clicked.connect(self.borrarInterfaz)
-
+        self.comboBoxDominio.activated[str].connect(self.dominioModificado)
 
 
     def rellenaDatosPersonales(self):
         self.etiquetasHeader = ['ATRIBUTO', 'VALOR']
-        
-        self.tableWidgetPersona = QtWidgets.QTableWidget(len(self.persona.atributos), 2)
-        self.tableWidgetPersona.setColumnWidth(0, 150)
-        self.tableWidgetPersona.setColumnWidth(1, 150)
-        self.tableWidgetPersona.setHorizontalHeaderLabels(self.etiquetasHeader)
-        
-        for i in range(0, len(self.persona.atributos)):
-            label = QtWidgets.QTableWidgetItem(self.persona.atributos[i].nombre)
-            label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            self.tableWidgetPersona.setItem(i, 0, label)
-            
-            if self.persona.atributos[i].tipo == 'multiple' or self.persona.atributos[i].tipo == 'boleano':
-                # Creamos el widget
-                widget = QtWidgets.QComboBox()
-                
-                # Añadimos la información a mostrar correspondiente en función del atributo
-                for posibleValor in self.persona.atributos[i].posiblesValores:
-                    if posibleValor is not str:
-                        widget.addItem(str(posibleValor))
-                    else:
-                        widget.addItem(posibleValor)
-                    
-                # Activamos la señal de cambio del widget
-                self.tableWidgetPersona.setCellWidget(i, 1, widget)
-            else:
-                widget = QtWidgets.QTableWidgetItem('')
-                self.tableWidgetPersona.setItem(i, 1, widget)
     
-        self.tableWidgetPersonap = QtWidgets.QTableWidget(len(self.personap.atributos), 2)
-        self.tableWidgetPersonap.setColumnWidth(0, 150)
-        self.tableWidgetPersonap.setColumnWidth(1, 150)
-        self.tableWidgetPersonap.setHorizontalHeaderLabels(self.etiquetasHeader)
-        
-        for i in range(0, len(self.personap.atributos)):
-            label = QtWidgets.QTableWidgetItem(self.personap.atributos[i].nombre)
+        self.tableWidgetPersona = self.crearTablaWidget(self.persona.atributos)
+        self.tableWidgetPersonap = self.crearTablaWidget(self.personap.atributos)
+    
+    def crearTablaWidget(self, atributos):
+        tableWidget = QtWidgets.QTableWidget(len(atributos), 2)
+        tableWidget.setColumnWidth(0, 150)
+        tableWidget.setColumnWidth(1, 150)
+        tableWidget.setHorizontalHeaderLabels(self.etiquetasHeader)
+    
+        for i, atributo in enumerate(atributos):
+            label = QtWidgets.QTableWidgetItem(atributo.nombre)
             label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            self.tableWidgetPersonap.setItem(i, 0, label)
-            
-            if self.personap.atributos[i].tipo == 'multiple' or self.personap.atributos[i].tipo == 'boleano':
-                # Creamos el widget
+            tableWidget.setItem(i, 0, label)
+    
+            if atributo.tipo == 'multiple' or atributo.tipo == 'boleano':
                 widget = QtWidgets.QComboBox()
-                
-                # Añadimos la información a mostrar correspondiente en función del atributo
-                for posibleValor in self.personap.atributos[i].posiblesValores:
-                    if posibleValor is not str:
-                        widget.addItem(str(posibleValor))
-                    else:
+                for posibleValor in atributo.posiblesValores:
+                    if isinstance(posibleValor, str):
                         widget.addItem(posibleValor)
-                    
-                # Activamos la señal de cambio del widget
-                self.tableWidgetPersonap.setCellWidget(i, 1, widget)
+                    else:
+                        widget.addItem(str(posibleValor))
+                tableWidget.setCellWidget(i, 1, widget)
             else:
                 widget = QtWidgets.QTableWidgetItem('')
-                self.tableWidgetPersonap.setItem(i, 1, widget)
+                tableWidget.setItem(i, 1, widget)
+    
+        return tableWidget
 
         
     def rellenaDatosSolicitud(self):
         self.etiquetasHeader = ['ATRIBUTO', 'VALOR']
-        
-        self.tableWidgetSolicitud = QtWidgets.QTableWidget(len(self.solicitud.atributos), 2)
-        self.tableWidgetSolicitud.setColumnWidth(0, 150)
-        self.tableWidgetSolicitud.setColumnWidth(1, 150)
-        self.tableWidgetSolicitud.setHorizontalHeaderLabels(self.etiquetasHeader)
-        
-        for i in range(0, len(self.solicitud.atributos)):
-            label = QtWidgets.QTableWidgetItem(self.solicitud.atributos[i].nombre)
-            label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            self.tableWidgetSolicitud.setItem(i, 0, label)
-            
-            if self.solicitud.atributos[i].tipo == 'multiple' or self.solicitud.atributos[i].tipo == 'boleano':
-                # Creamos el widget
-                widget = QtWidgets.QComboBox()
-                
-                # Añadimos la información a mostrar correspondiente en función del atributo
-                for posibleValor in self.solicitud.atributos[i].posiblesValores:
-                    if posibleValor is not str:
-                        widget.addItem(str(posibleValor))
-                    else:
-                        widget.addItem(posibleValor)
-                    
-                # Activamos la señal de cambio del widget
-                self.tableWidgetSolicitud.setCellWidget(i, 1, widget)
-            else:
-                widget = QtWidgets.QTableWidgetItem('')
-                self.tableWidgetSolicitud.setItem(i, 1, widget)
     
-        self.tableWidgetSolicitudp = QtWidgets.QTableWidget(len(self.solicitudp.atributos), 2)
-        self.tableWidgetSolicitudp.setColumnWidth(0, 150)
-        self.tableWidgetSolicitudp.setColumnWidth(1, 150)
-        self.tableWidgetSolicitudp.setHorizontalHeaderLabels(self.etiquetasHeader)
-        
-        for i in range(0, len(self.solicitudp.atributos)):
-            label = QtWidgets.QTableWidgetItem(self.solicitudp.atributos[i].nombre)
+        self.tableWidgetSolicitud = self.crearTablaWidgetDS(self.solicitud.atributos)
+        self.tableWidgetSolicitudp = self.crearTablaWidgetDS(self.solicitudp.atributos)
+    
+    def crearTablaWidgetDS(self, atributos):
+        tableWidget = QtWidgets.QTableWidget(len(atributos), 2)
+        tableWidget.setColumnWidth(0, 150)
+        tableWidget.setColumnWidth(1, 150)
+        tableWidget.setHorizontalHeaderLabels(self.etiquetasHeader)
+    
+        for i, atributo in enumerate(atributos):
+            label = QtWidgets.QTableWidgetItem(atributo.nombre)
             label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-            self.tableWidgetSolicitudp.setItem(i, 0, label)
-            
-            if self.solicitudp.atributos[i].tipo == 'multiple' or self.solicitudp.atributos[i].tipo == 'boleano':
-                # Creamos el widget
+            tableWidget.setItem(i, 0, label)
+    
+            if atributo.tipo == 'multiple' or atributo.tipo == 'boleano':
                 widget = QtWidgets.QComboBox()
-                
-                # Añadimos la información a mostrar correspondiente en función del atributo
-                for posibleValor in self.solicitudp.atributos[i].posiblesValores:
-                    if posibleValor is not str:
-                        widget.addItem(str(posibleValor))
-                    else:
+                for posibleValor in atributo.posiblesValores:
+                    if isinstance(posibleValor, str):
                         widget.addItem(posibleValor)
-                    
-                # Activamos la señal de cambio del widget
-                self.tableWidgetSolicitudp.setCellWidget(i, 1, widget)
+                    else:
+                        widget.addItem(str(posibleValor))
+                tableWidget.setCellWidget(i, 1, widget)
             else:
                 widget = QtWidgets.QTableWidgetItem('')
-                self.tableWidgetSolicitudp.setItem(i, 1, widget)
+                tableWidget.setItem(i, 1, widget)
+    
+        return tableWidget
 
 
     def rellenaAbstraidos(self):
-        self.etiquetasHeader = ['ATRIBUTO', 'VALOR']
+        self.tableWidgetDatosAbstraidos.clear()
+        self.tableWidgetDatosAbstraidos.setColumnCount(2)
+        self.tableWidgetDatosAbstraidos.setColumnWidth(0, 150)
+        self.tableWidgetDatosAbstraidos.setColumnWidth(1, 150)
+        self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(self.etiquetasHeader)
+        
+        atributos = []
+        
         if self.dominio == 'Becas':
-            self.tableWidgetDatosAbstraidos = QtWidgets.QTableWidget(len(self.solicitud.atributos) + len(self.persona.atributos), 2)
-            self.tableWidgetDatosAbstraidos.setColumnWidth(0, 150)
-            self.tableWidgetDatosAbstraidos.setColumnWidth(1, 150)
-            self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(self.etiquetasHeader)
-            for i in range(0, len(self.solicitud.atributos)):
-                label = QtWidgets.QTableWidgetItem(self.solicitud.atributos[i].nombre)
-                label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 0, label)
-                
-                label1 = QtWidgets.QTableWidgetItem(str(self.solicitud.atributos[i].valor))
-                label1.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 1, label1)
-            for i in range(len(self.solicitud.atributos), len(self.persona.atributos) + len(self.solicitud.atributos)):
-                label2 = QtWidgets.QTableWidgetItem(self.persona.atributos[i - len(self.solicitud.atributos)].nombre)
-                label2.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 0, label2)
-                
-                label3 = QtWidgets.QTableWidgetItem(str(self.persona.atributos[i - len(self.solicitud.atributos)].valor))
-                label3.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 1, label3)
+            atributos = self.solicitud.atributos + self.persona.atributos
+        elif self.dominio == 'Prestamos':
+            atributos = self.solicitudp.atributos + self.personap.atributos
+        
+        self.tableWidgetDatosAbstraidos.setRowCount(len(atributos))
+        
+        for i, atributo in enumerate(atributos):
+            label = QtWidgets.QTableWidgetItem(atributo.nombre)
+            label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            self.tableWidgetDatosAbstraidos.setItem(i, 0, label)
             
-        if self.dominio == 'Prestamos':
-            self.tableWidgetDatosAbstraidos = QtWidgets.QTableWidget(len(self.solicitudp.atributos) + len(self.personap.atributos), 2)
-            self.tableWidgetDatosAbstraidos.setColumnWidth(0, 150)
-            self.tableWidgetDatosAbstraidos.setColumnWidth(1, 150)
-            self.tableWidgetDatosAbstraidos.setHorizontalHeaderLabels(self.etiquetasHeader)
-            for i in range(0, len(self.solicitudp.atributos)):
-                label = QtWidgets.QTableWidgetItem(self.solicitudp.atributos[i].nombre)
-                label.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 0, label)
-                
-                label1 = QtWidgets.QTableWidgetItem(str(self.solicitudp.atributos[i].valor))
-                label1.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 1, label1)
-            for i in range(len(self.solicitudp.atributos), len(self.personap.atributos) + len(self.solicitudp.atributos)):
-                label2 = QtWidgets.QTableWidgetItem(self.personap.atributos[i - len(self.solicitudp.atributos)].nombre)
-                label2.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 0, label2)
-                
-                label3 = QtWidgets.QTableWidgetItem(str(self.personap.atributos[i - len(self.solicitudp.atributos)].valor))
-                label3.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
-                self.tableWidgetDatosAbstraidos.setItem(i, 1, label3)
+            valor = QtWidgets.QTableWidgetItem(str(atributo.valor))
+            valor.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
+            self.tableWidgetDatosAbstraidos.setItem(i, 1, valor)
         
         self.grid.addWidget(self.tableWidgetDatosAbstraidos, 1, 1, 3, 1)
+
 
     
     def center(self):
@@ -303,130 +231,61 @@ class ValoracionDlg(QtWidgets.QWidget):
         if self.obtenerInformacionObjeto():
             if self.dominio == 'Becas':
                 resultado, descripcion = ctrl.eventoValorar(self.persona, self.solicitud)
-            if self.dominio == 'Prestamos':
+                self.solicitud.descripcion = u''
+            elif self.dominio == 'Prestamos':
                 resultado, descripcion = ctrl.eventoValorar(self.personap, self.solicitudp)
+                self.solicitudp.descripcion = u''
                 
             self.plainTextEditDecision.clear()
             self.plainTextEditExplicacion.clear()
             self.tableWidgetDatosAbstraidos.clear()
-            self.solicitud.descripcion = u''
-            self.solicitudp.descripcion = u''
-            if resultado == True:
+            
+            if resultado:
                 self.plainTextEditDecision.insertPlainText("Concedida")
-                self.plainTextEditExplicacion.insertPlainText(descripcion)
             else:
                 self.plainTextEditDecision.insertPlainText("Denegada")
-                self.plainTextEditExplicacion.insertPlainText(descripcion)
+                
+            self.plainTextEditExplicacion.insertPlainText(descripcion)
             self.rellenaAbstraidos()
+
 
     def obtenerInformacionObjeto(self):
         informacionCorrecta = True
-        if self.dominio == 'Becas':
-            for i in range(self.tableWidgetPersona.rowCount()):
-                if self.persona.atributos[i].tipo == 'str':
-                    self.persona.atributos[i].valor = self.tableWidgetPersona.item(i, 1).text()
-                elif self.persona.atributos[i].tipo == 'int':
-                    try:
-                        self.persona.atributos[i].valor = int(self.tableWidgetPersona.item(i, 1).text())
-                        self.tableWidgetPersona.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetPersona.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.persona.atributos[i].tipo == 'float':
-                    try:
-                        self.persona.atributos[i].valor = float(self.tableWidgetPersona.item(i, 1).text())
-                        self.tableWidgetPersona.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetPersona.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.persona.atributos[i].tipo == 'multiple':
-                    self.persona.atributos[i].valor = self.tableWidgetPersona.cellWidget(i, 1).currentText()
-                elif self.persona.atributos[i].tipo == 'boleano':
-                    if self.tableWidgetPersona.cellWidget(i, 1).currentText() == 'True':
-                        self.persona.atributos[i].valor = True
-                    else:
-                        self.persona.atributos[i].valor = False
+        tableWidgets = [self.tableWidgetPersona, self.tableWidgetSolicitud]
+        objetos = [self.persona, self.solicitud]
     
-            for i in range(self.tableWidgetSolicitud.rowCount()):
-                if self.solicitud.atributos[i].tipo == 'str':
-                    self.solicitud.atributos[i].valor = self.tableWidgetSolicitud.item(i, 1).text()
-                elif self.solicitud.atributos[i].tipo == 'int':
-                    try:
-                        self.solicitud.atributos[i].valor = int(self.tableWidgetSolicitud.item(i, 1).text())
-                        self.tableWidgetSolicitud.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetSolicitud.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.solicitud.atributos[i].tipo == 'float':
-                    try:
-                        self.solicitud.atributos[i].valor = float(self.tableWidgetSolicitud.item(i, 1).text())
-                        self.tableWidgetSolicitud.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetSolicitud.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.solicitud.atributos[i].tipo == 'multiple':
-                    self.solicitud.atributos[i].valor = self.tableWidgetSolicitud.cellWidget(i, 1).currentText()
-                elif self.solicitud.atributos[i].tipo == 'boleano':
-                    if self.tableWidgetSolicitud.cellWidget(i, 1).currentText() == 'True':
-                        self.solicitud.atributos[i].valor = True
-                    else:
-                        self.solicitud.atributos[i].valor = False
         if self.dominio == 'Prestamos':
-            for i in range(self.tableWidgetPersonap.rowCount()):
-                if self.personap.atributos[i].tipo == 'str':
-                    self.personap.atributos[i].valor = self.tableWidgetPersonap.item(i, 1).text()
-                elif self.personap.atributos[i].tipo == 'int':
-                    try:
-                        self.personap.atributos[i].valor = int(self.tableWidgetPersonap.item(i, 1).text())
-                        self.tableWidgetPersonap.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetPersonap.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.personap.atributos[i].tipo == 'float':
-                    try:
-                        self.personap.atributos[i].valor = float(self.tableWidgetPersonap.item(i, 1).text())
-                        self.tableWidgetPersonap.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
-                    except:
-                        self.tableWidgetPersonap.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
-                        informacionCorrecta = False
-                elif self.personap.atributos[i].tipo == 'multiple':
-                    self.personap.atributos[i].valor = self.tableWidgetPersonap.cellWidget(i, 1).currentText()
-                elif self.personap.atributos[i].tipo == 'boleano':
-                    if self.tableWidgetPersonap.cellWidget(i, 1).currentText() == 'True':
-                        self.personap.atributos[i].valor = True
-                    else:
-                        self.personap.atributos[i].valor = False
+            tableWidgets = [self.tableWidgetPersonap, self.tableWidgetSolicitudp]
+            objetos = [self.personap, self.solicitudp]
     
-            for i in range(self.tableWidgetSolicitudp.rowCount()):
-                if self.solicitudp.atributos[i].tipo == 'str':
-                    self.solicitudp.atributos[i].valor = self.tableWidgetSolicitudp.item(i, 1).text()
-                elif self.solicitudp.atributos[i].tipo == 'int':
+        for widget, objeto in zip(tableWidgets, objetos):
+            for i in range(widget.rowCount()):
+                atributo = objeto.atributos[i]
+                item = widget.item(i, 1)
+                if atributo.tipo == 'str':
+                    atributo.valor = item.text()
+                elif atributo.tipo == 'int':
                     try:
-                        self.solicitudp.atributos[i].valor = int(self.tableWidgetSolicitudp.item(i, 1).text())
-                        self.tableWidgetSolicitudp.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
+                        atributo.valor = int(item.text())
+                        item.setBackground(QtGui.QColor(255, 255, 255))
                     except:
-                        self.tableWidgetSolicitudp.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
+                        item.setBackground(QtGui.QColor(255, 0, 0))
                         informacionCorrecta = False
-                elif self.solicitudp.atributos[i].tipo == 'float':
+                elif atributo.tipo == 'float':
                     try:
-                        self.solicitudp.atributos[i].valor = float(self.tableWidgetSolicitudp.item(i, 1).text())
-                        self.tableWidgetSolicitudp.item(i, 1).setBackground(QtGui.QColor(255, 255, 255))
+                        atributo.valor = float(item.text())
+                        item.setBackground(QtGui.QColor(255, 255, 255))
                     except:
-                        self.tableWidgetSolicitudp.item(i, 1).setBackground(QtGui.QColor(255, 0, 0))
+                        item.setBackground(QtGui.QColor(255, 0, 0))
                         informacionCorrecta = False
-                elif self.solicitudp.atributos[i].tipo == 'multiple':
-                    self.solicitudp.atributos[i].valor = self.tableWidgetSolicitudp.cellWidget(i, 1).currentText()
-                elif self.solicitudp.atributos[i].tipo == 'boleano':
-                    if self.tableWidgetSolicitudp.cellWidget(i, 1).currentText() == 'True':
-                        self.solicitudp.atributos[i].valor = True
-                    else:
-                        self.solicitudp.atributos[i].valor = False
+                elif atributo.tipo == 'multiple':
+                    atributo.valor = widget.cellWidget(i, 1).currentText()
+                elif atributo.tipo == 'boleano':
+                    atributo.valor = (widget.cellWidget(i, 1).currentText() == 'True')
     
         return informacionCorrecta
 
-        
-        
-    
+
     def borrarInterfaz(self):
         self.plainTextEditDecision.clear()
         self.plainTextEditExplicacion.clear()
@@ -445,6 +304,7 @@ class ValoracionDlg(QtWidgets.QWidget):
                 self.tableWidgetSolicitud.hide()
                 self.tableWidgetSolicitudp.show()
                 self.tableWidgetPersonap.show()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
