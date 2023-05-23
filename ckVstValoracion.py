@@ -12,7 +12,7 @@ Base de conocimiento de valoracion de Becas
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QPushButton,QHeaderView
+from PyQt5.QtWidgets import QPushButton,QHeaderView,QVBoxLayout
 from PyQt5.QtGui import QIcon
 
 from bcValoracion import *
@@ -31,12 +31,13 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.dominio = 'Becas'
 
         # Label
-        labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos del Solicitante", self)
-        labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la solicitud", self)
-        labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos Abstraidos", self)
+        self.labelTableWidgetDatosPersonales = QtWidgets.QLabel("Datos del Solicitante", self)
+        self.labelTableWidgetDatosSolicitud = QtWidgets.QLabel("Datos de la solicitud", self)
+        self.labelTableWidgetDatosAbstraidos = QtWidgets.QLabel("Datos Abstraidos", self)
 
-        labelTextDecision = QtWidgets.QLabel("Decisión", self)
-        labelTextExplicacion = QtWidgets.QLabel("Explicacion", self)
+
+        self.labelTextDecision = QtWidgets.QLabel("Decisión", self)
+        self.labelTextExplicacion = QtWidgets.QLabel("Explicacion", self)
 
         # Widget
         header = ['ATRIBUTO', 'VALOR']
@@ -57,11 +58,12 @@ class ValoracionDlg(QtWidgets.QWidget):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.plainTextEditDecision.setFont(font)
+
         
         # Explicación
         self.plainTextEditExplicacion = QtWidgets.QPlainTextEdit()
 
-        labelComboBoxDominio = QtWidgets.QLabel("Dominio", self)
+        self.labelComboBoxDominio = QtWidgets.QLabel("Dominio", self)
         self.comboBoxDominio = QtWidgets.QComboBox()
         self.comboBoxDominio.addItem('Becas')
         self.comboBoxDominio.addItem('Prestamos')
@@ -76,33 +78,48 @@ class ValoracionDlg(QtWidgets.QWidget):
         
         self.salirButtom = QPushButton(QIcon("./exit24.png"), "Salir", self)
         self.salirButtom.setShortcut("Ctrl+s")
+    
+    # Widgets Verticales Derecha
+        v1 = QVBoxLayout()
+        v1.addWidget(self.labelTableWidgetDatosAbstraidos)
+        v1.addWidget(self.tableWidgetDatosAbstraidos)
+        v1.addWidget(self.labelTextExplicacion)
+        v1.addWidget(self.plainTextEditExplicacion)
         
-        self.buttomsLayout = QtWidgets.QHBoxLayout()
-        self.buttomsLayout.addStretch()
-        self.buttomsLayout.addWidget(self.valorarButtom)
-        self.buttomsLayout.addWidget(self.borrarButtom)
-        self.buttomsLayout.addWidget(self.salirButtom)
-        self.buttomsLayout.addStretch()
-
-        # Rejilla de distribución de los controles
-        self.grid = QtWidgets.QGridLayout()
-        self.grid.setSpacing(5)
-
-        self.grid.addWidget(labelComboBoxDominio, 0, 0)
-        self.grid.addWidget(self.comboBoxDominio, 1, 0)
-
-        self.grid.addWidget(labelTableWidgetDatosPersonales, 2, 0)
-        self.grid.addWidget(self.tableWidgetPersona, 3, 0)
-        self.grid.addWidget(self.tableWidgetPersonap, 3, 0)
+    # Widgets Verticales izquierda
+        v2 = QVBoxLayout()
+        v2.addWidget(self.labelComboBoxDominio)
+        v2.addWidget(self.comboBoxDominio)
+        v2.addWidget(self.labelTableWidgetDatosPersonales)
+        v2.addWidget(self.tableWidgetPersona)
+        v2.addWidget(self.tableWidgetPersonap)
         self.tableWidgetPersonap.hide()
-        self.grid.addWidget(labelTableWidgetDatosAbstraidos, 0, 1)
-
-        self.grid.addWidget(labelTableWidgetDatosSolicitud, 4, 0)
-        self.grid.addWidget(self.tableWidgetSolicitud, 5, 0)
-        self.grid.addWidget(self.tableWidgetSolicitudp, 5, 0)
+        v2.addWidget(self.labelTableWidgetDatosSolicitud)
+        v2.addWidget(self.tableWidgetSolicitud)
+        v2.addWidget(self.tableWidgetSolicitudp)
         self.tableWidgetSolicitudp.hide()
+        v2.addWidget(self.labelTextDecision)
+        v2.addWidget(self.plainTextEditDecision)
+
+    # Botones
+        bt = QtWidgets.QHBoxLayout()
+        bt.addWidget(self.valorarButtom)
+        bt.addWidget(self.borrarButtom)
+        bt.addWidget(self.salirButtom)
+
+
+    # Horizontales juntos
+        hl = QtWidgets.QHBoxLayout()
+        hl.addLayout(v2)
+        hl.addLayout(v1)
         
-        # Hacer que las columnas de la tablas deocupen todo el espacio disponible
+    # Diseño principal
+        mainLayout = QtWidgets.QVBoxLayout()
+        mainLayout.addLayout(hl)
+        mainLayout.addLayout(bt)
+        self.setLayout(mainLayout)
+
+    # Hacer que las columnas de la tablas deocupen todo el espacio disponible
         self.tableWidgetSolicitud.horizontalHeader().setStretchLastSection(True)
         self.tableWidgetSolicitud.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidgetSolicitudp.horizontalHeader().setStretchLastSection(True)
@@ -111,25 +128,13 @@ class ValoracionDlg(QtWidgets.QWidget):
         self.tableWidgetPersona.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidgetPersonap.horizontalHeader().setStretchLastSection(True)
         self.tableWidgetPersonap.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-                                                                          
-        self.grid.addWidget(labelTextDecision, 6, 0)
-        self.grid.addWidget(self.plainTextEditDecision, 7, 0)
 
-        self.grid.addWidget(labelTextExplicacion, 6, 1)
-        self.grid.addWidget(self.plainTextEditExplicacion, 7, 1)
-
-        # Diseño principal
-        mainLayout = QtWidgets.QVBoxLayout()
-        mainLayout.addLayout(self.grid)
-        mainLayout.addLayout(self.buttomsLayout)
-        self.setLayout(mainLayout)
 
         # Dimensiones de la ventana
-        self.setGeometry(300, 300, 1200, 1200)
+        self.setGeometry(150, 150, 1700, 900)
         self.setWindowTitle("TAREA DE VALORACIÓN")
-        self.show()
+        self.showMaximized()
 
-        self.center()
         # Conexiones:
         # ==========
         self.valorarButtom.clicked.connect(self.valorar)
@@ -227,7 +232,6 @@ class ValoracionDlg(QtWidgets.QWidget):
             valor.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
             self.tableWidgetDatosAbstraidos.setItem(i, 1, valor)
         
-        self.grid.addWidget(self.tableWidgetDatosAbstraidos, 1, 1, 5, 1)
         
         # Hacer que las columnas de la tablas deocupen todo el espacio disponible
         self.tableWidgetDatosAbstraidos.horizontalHeader().setStretchLastSection(True)
@@ -320,6 +324,7 @@ class ValoracionDlg(QtWidgets.QWidget):
                 self.tableWidgetPersonap.show()
 
 
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     form = ValoracionDlg()
